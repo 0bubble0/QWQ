@@ -28,9 +28,12 @@
       transform: translate(-50%, -50%);
       background-color: #f44336;
       color: white;
-      padding: 20px;
-      border-radius: 5px;
+      padding: 40px;
+      border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      width: 400px;
+      height: 200px;
+      animation: shakeAndFlyAway 0.5s ease;
     }
 
    .close {
@@ -43,6 +46,33 @@
 
    .hidden {
       display: none;
+    }
+
+    @keyframes shakeAndFlyAway {
+      0% {
+        transform: translate(-50%, -50%);
+      }
+
+      20% {
+        transform: translate(-50%, -50%) rotate(5deg);
+      }
+
+      40% {
+        transform: translate(-50%, -50%) rotate(-5deg);
+      }
+
+      60% {
+        transform: translate(-50%, -50%) rotate(3deg);
+      }
+
+      80% {
+        transform: translate(-50%, -50%) rotate(-3deg);
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(0.1) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
