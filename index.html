@@ -1,132 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    canvas {
-      border: 1px solid black;
-      background-color: lightblue;
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #score {
+      font-size: 24px;
     }
   </style>
+  <title>😏😏😏</title>
 </head>
 
 <body>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <p id="score">Score: 0</p>
+  <button id="randomButton" style="display:none;">呵呵呵</button>
   <script>
-    // 获取画布和上下文
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
+    let score = 0;
+    const scoreElement = document.getElementById('score');
+    const button = document.getElementById('randomButton');
 
-    // 球拍和球的结构体
-    const paddleWidth = 10;
-    const paddleHeight = 80;
-    const ballSize = 10;
+    function createRandomButton() {
+      const { clientWidth, clientHeight } = document.documentElement;
+      const x = Math.random() * clientWidth;
+      const y = Math.random() * clientHeight;
+      button.style.left = `${x}px`;
+      button.style.top = `${y}px`;
+      button.style.display = 'block';
 
-    const player1 = {
-      x: 50,
-      y: canvas.height / 2 - paddleHeight / 2,
-      width: paddleWidth,
-      height: paddleHeight,
-      score: 0
-    };
-
-    const player2 = {
-      x: canvas.width - 50 - paddleWidth,
-      y: canvas.height / 2 - paddleHeight / 2,
-      width: paddleWidth,
-      height: paddleHeight,
-      score: 0
-    };
-
-    const ball = {
-      x: canvas.width / 2,
-      y: canvas.height / 2,
-      radius: ballSize,
-      speedX: 5,
-      speedY: 5
-    };
-
-    // 绘制球拍
-    function drawPaddle(paddle) {
-      ctx.fillStyle = 'black';
-      ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+      // 生成不同的按钮文案
+      const buttonTexts = ['陪半月猫去吧', '大袜子', '别点我', '给我买星巴克', '我要麦当劳'];
+      const randomIndex = Math.floor(Math.random() * buttonTexts.length);
+      button.textContent = buttonTexts[randomIndex];
     }
 
-    // 绘制球
-    function drawBall() {
-      ctx.fillStyle = 'white';
-      ctx.beginPath();
-      ctx.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
-      ctx.fill();
-    }
-
-    // 绘制分数
-    function drawScores() {
-      ctx.font = '30px Arial';
-      ctx.fillStyle = 'black';
-      ctx.fillText(player1.score, canvas.width / 4, 50);
-      ctx.fillText(player2.score, 3 * canvas.width / 4, 50);
-    }
-
-    // 移动球拍（这里只是简单示例，可根据需求优化控制方式）
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'w' && player1.y > 0) {
-        player1.y -= 10;
-      } else if (e.key === 's' && player1.y < canvas.height - player1.height) {
-        player1.y += 10;
-      } else if (e.key === 'e' && player2.y > 0) {
-        player2.y -= 10;
-      } else if (e.key === 'd' && player2.y < canvas.height - player2.height) {
-        player2.y += 10;
-      }
+    button.addEventListener('click', () => {
+      score++;
+      scoreElement.textContent = `Score: ${score}`;
+      button.style.display = 'none';
+      createRandomButton();
     });
 
-    // 游戏主循环
-    function gameLoop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      drawPaddle(player1);
-      drawPaddle(player2);
-      drawBall();
-      drawScores();
-
-      // 球的移动
-      ball.x += ball.speedX;
-      ball.y += ball.speedY;
-
-      // 球与墙壁的碰撞检测
-      if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
-        ball.speedY = -ball.speedY;
-      }
-
-      // 球与球拍的碰撞检测
-      if ((ball.x - ball.radius < player1.x + player1.width && ball.y > player1.y && ball.y < player1.y + player1.height) ||
-          (ball.x + ball.radius > player2.x && ball.y > player2.y && ball.y < player2.y + player2.height)) {
-        ball.speedX = -ball.speedX;
-      }
-
-      // 球出界检测
-      if (ball.x - ball.radius < 0) {
-        player2.score++;
-        resetBall();
-      } else if (ball.x + ball.radius > canvas.width) {
-        player1.score++;
-        resetBall();
-      }
-
-      requestAnimationFrame(gameLoop);
-    }
-
-    // 重置球的位置和速度
-    function resetBall() {
-      ball.x = canvas.width / 2;
-      ball.y = canvas.height / 2;
-      ball.speedX = 5;
-      ball.speedY = 5;
-    }
-
-    // 开始游戏循环
-    gameLoop();
+    createRandomButton();
   </script>
 </body>
 
