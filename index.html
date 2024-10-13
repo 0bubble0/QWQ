@@ -1,100 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>想干森马？🥵🥵🥵</title>
   <style>
-    button {
-      padding: 15px 30px;
-      background-color: #4CAF50;
+    #downloadButton {
+      padding: 10px 20px;
+      background-color: #FF0000;
+      /* 红色按钮 */
       color: white;
       border: none;
+      cursor: pointer;
       border-radius: 5px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
     }
 
-    button:hover {
-      background-color: #45a049;
-    }
-
-   .alert {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #f44336;
-      color: white;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      width: 400px;
-      height: 200px;
-      animation: shakeAndFlyAway 0.5s ease;
-    }
-
-   .close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-      font-size: 20px;
-    }
-
-   .hidden {
-      display: none;
-    }
-
-    @keyframes shakeAndFlyAway {
-      0% {
-        transform: translate(-50%, -50%);
-      }
-
-      20% {
-        transform: translate(-50%, -50%) rotate(5deg);
-      }
-
-      40% {
-        transform: translate(-50%, -50%) rotate(-5deg);
-      }
-
-      60% {
-        transform: translate(-50%, -50%) rotate(3deg);
-      }
-
-      80% {
-        transform: translate(-50%, -50%) rotate(-3deg);
-      }
-
-      100% {
-        transform: translate(-50%, -50%) scale(0.1) rotate(360deg);
-        opacity: 0;
-      }
+    #downloadButton:hover {
+      background-color: #CC0000;
+      /* 鼠标悬停时颜色变深 */
     }
   </style>
 </head>
 
 <body>
-  <button id="myButton">别点击！！！会使你的屁股脱落</button>
-  <div id="myAlert" class="alert hidden">
-    你还是点了🙄
-    <span class="close">&times;</span>
-  </div>
-
+  <button id="downloadButton">别点！！！</button>
   <script>
-    const button = document.getElementById('myButton');
-    const alertBox = document.getElementById('myAlert');
-    const closeBtn = document.querySelector('.close');
-
-    button.addEventListener('click', () => {
-      alertBox.classList.remove('hidden');
-    });
-
-    closeBtn.addEventListener('click', () => {
-      alertBox.classList.add('hidden');
+    document.getElementById('downloadButton').addEventListener('click', function () {
+      // 这里假设服务器的域名是yourdomain.com，根据实际情况修改
+      var fileUrl = 'https://download1583.mediafire.com/fkec5xqvcingpR_mQWYtnxUL9YAJ46CZBuQYNh9b7Vv_UTzUsrrXAJX-dyFkahSD2sYsXBNg9LqCfakjllTSxaWcU-6_mmta_WQnMlODenbXz3TbcXD2KZ2y87aK2ZeVsxCBqbthJaTmLUppr_X8DsIA2xDHeHS3kB0Di5QDloSI0A/kzcxsdfg9bbusps/%E6%96%B0%E5%BB%BA+%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3.txt';
+      window.location.href = fileUrl;
     });
   </script>
 </body>
