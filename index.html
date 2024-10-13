@@ -3,31 +3,130 @@
 
 <head>
   <style>
-    #downloadButton {
-      padding: 10px 20px;
-      background-color: #FF0000;
-      /* 红色按钮 */
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    #downloadButton:hover {
-      background-color: #CC0000;
-      
+    canvas {
+      border: 1px solid black;
+      background-color: lightblue;
     }
   </style>
 </head>
 
 <body>
-  <button id="downloadButton">别点！！！</button>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
   <script>
-    document.getElementById('downloadButton').addEventListener('click', function () {
-      
-      var fileUrl = 'https://www.mediafire.com/file/kzcxsdfg9bbusps/%25E6%2596%25B0%25E5%25BB%25BA_%25E6%2596%2587%25E6%259C%25AC%25E6%2596%2587%25E6%25A1%25A3.txt/file';
-      window.location.href = fileUrl;
+    // 获取画布和上下文
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // 球拍和球的结构体
+    const paddleWidth = 10;
+    const paddleHeight = 80;
+    const ballSize = 10;
+
+    const player1 = {
+      x: 50,
+      y: canvas.height / 2 - paddleHeight / 2,
+      width: paddleWidth,
+      height: paddleHeight,
+      score: 0
+    };
+
+    const player2 = {
+      x: canvas.width - 50 - paddleWidth,
+      y: canvas.height / 2 - paddleHeight / 2,
+      width: paddleWidth,
+      height: paddleHeight,
+      score: 0
+    };
+
+    const ball = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      radius: ballSize,
+      speedX: 5,
+      speedY: 5
+    };
+
+    // 绘制球拍
+    function drawPaddle(paddle) {
+      ctx.fillStyle = 'black';
+      ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+    }
+
+    // 绘制球
+    function drawBall() {
+      ctx.fillStyle = 'white';
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    // 绘制分数
+    function drawScores() {
+      ctx.font = '30px Arial';
+      ctx.fillStyle = 'black';
+      ctx.fillText(player1.score, canvas.width / 4, 50);
+      ctx.fillText(player2.score, 3 * canvas.width / 4, 50);
+    }
+
+    // 移动球拍（这里只是简单示例，可根据需求优化控制方式）
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'w' && player1.y > 0) {
+        player1.y -= 10;
+      } else if (e.key === 's' && player1.y < canvas.height - player1.height) {
+        player1.y += 10;
+      } else if (e.key === 'Up' && player2.y > 0) {
+        player2.y -= 10;
+      } else if (e.key === 'Down' && player2.y < canvas.height - player2.height) {
+        player2.y += 10;
+      }
     });
+
+    // 游戏主循环
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawPaddle(player1);
+      drawPaddle(player2);
+      drawBall();
+      drawScores();
+
+      // 球的移动
+      ball.x += ball.speedX;
+      ball.y += ball.speedY;
+
+      // 球与墙壁的碰撞检测
+      if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
+        ball.speedY = -ball.speedY;
+      }
+
+      // 球与球拍的碰撞检测
+      if ((ball.x - ball.radius < player1.x + player1.width && ball.y > player1.y && ball.y < player1.y + player1.height) ||
+          (ball.x + ball.radius > player2.x && ball.y > player2.y && ball.y < player2.y + player2.height)) {
+        ball.speedX = -ball.speedX;
+      }
+
+      // 球出界检测
+      if (ball.x - ball.radius < 0) {
+        player2.score++;
+        resetBall();
+      } else if (ball.x + ball.radius > canvas.width) {
+        player1.score++;
+        resetBall();
+      }
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    // 重置球的位置和速度
+    function resetBall() {
+      ball.x = canvas.width / 2;
+      ball.y = canvas.height / 2;
+      ball.speedX = 5;
+      ball.speedY = 5;
+    }
+
+    // 开始游戏循环
+    gameLoop();
   </script>
 </body>
 
