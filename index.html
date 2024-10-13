@@ -16,6 +16,25 @@
     #score {
       font-size: 24px;
     }
+
+    #randomButton {
+      background-color: #4CAF50;
+      /* 绿色背景 */
+      color: white;
+      /* 白色文字 */
+      padding: 15px 32px;
+      /* 内边距增加按钮大小 */
+      text-align: center;
+      text-decoration: none;
+      /* 去除下划线 */
+      display: inline-block;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      /* 圆角 */
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      /* 阴影效果 */
+    }
   </style>
   <title>😏😏😏</title>
 </head>
@@ -30,8 +49,10 @@
 
     function createRandomButton() {
       const { clientWidth, clientHeight } = document.documentElement;
-      const x = Math.random() * clientWidth;
-      const y = Math.random() * clientHeight;
+      const maxX = clientWidth - button.offsetWidth;
+      const maxY = clientHeight - button.offsetHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
       button.style.left = `${x}px`;
       button.style.top = `${y}px`;
       button.style.display = 'block';
