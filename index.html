@@ -1,68 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>那艺娜</title>
   <style>
     body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-
-    #score {
+      background-color: black;
+      color: white;
+      text-align: center;
       font-size: 24px;
     }
 
-    #randomButton {
-      background-color: #4CAF50;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+   .scary-face {
+      width: 200px;
+      height: 200px;
+      background-image: url('download.jpg');
+      background-size: cover;
+      animation: faceAppear 2s ease-in-out;
+    }
+
+    @keyframes faceAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
   </style>
-  <title>😏😏😏</title>
 </head>
 
 <body>
-  <p id="score">Score: 0</p>
-  <button id="randomButton" style="display:none;">呵呵呵</button>
+  <h1>那艺娜的大贝塔</h1>
+  <div class="scary-face"></div>
+  <p>爱如火 恨如冰</p>
+  <button onclick="closeWindow()">关闭</button>
   <script>
-    let score = 0;
-    const scoreElement = document.getElementById('score');
-    const button = document.getElementById('randomButton');
-
-    function createRandomButton() {
-      const { clientWidth, clientHeight } = document.documentElement;
-      let x = Math.floor(Math.random() * clientWidth);
-      let y = Math.floor(Math.random() * clientHeight);
-      button.style.left = x + 'px';
-      button.style.top = y + 'px';
-      button.style.display = 'block';
-
-      // 生成不同的按钮文案
-      const buttonTexts = ['陪半月猫去吧', '大袜子', '别点我', '给我买星巴克', '我要麦当劳'];
-      const randomIndex = Math.floor(Math.random() * buttonTexts.length);
-      button.textContent = buttonTexts[randomIndex];
+    function closeWindow() {
+      window.close();
     }
-
-    button.addEventListener('click', () => {
-      score++;
-      scoreElement.textContent = `Score: ${score}`;
-      button.style.display = 'none';
-      createRandomButton();
-    });
-
-    createRandomButton();
   </script>
 </body>
 
