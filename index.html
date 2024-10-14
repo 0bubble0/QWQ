@@ -11,12 +11,39 @@
       font-size: 24px;
     }
 
+    h1 {
+      animation: blink 1s infinite alternate;
+    }
+
    .scary-face {
       width: 200px;
       height: 200px;
       background-image: url('download.jpg');
       background-size: cover;
-      animation: faceAppear 2s ease-in-out;
+      position: absolute;
+      animation: randomMove 5s infinite;
+    }
+
+    @keyframes blink {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0.5;
+      }
+    }
+
+    @keyframes randomMove {
+      from {
+        top: 0;
+        left: 0;
+      }
+
+      to {
+        top: random(100vh);
+        left: random(100vw);
+      }
     }
 
     @keyframes faceAppear {
