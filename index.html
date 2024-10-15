@@ -1,68 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>那艺娜</title>
+  <meta charset="UTF-8">
+  <title>Page</title>
   <style>
     body {
-      background-color: black;
-      color: white;
-      text-align: center;
-      font-size: 24px;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
     }
-
     h1 {
-      animation: blinkFast 0.2s infinite alternate;
-    }
-
-  .scary-face {
-      width: 200px;
-      height: 200px;
-      background-image: url('download.jpg');
-      background-size: cover;
-      position: absolute;
-      animation: moveToRandom 0.1s infinite;
-      color: white;
-      font-size: 16px;
+      color: #333;
       text-align: center;
-      line-height: 200px;
     }
-
-    @keyframes blinkFast {
-      from {
-        opacity: 1;
-      }
-
-      to {
-        opacity: 0.5;
-      }
-    }
-
-    @keyframes moveToRandom {
-      from {
-        top: 0;
-        left: 0;
-      }
-
-      to {
-        top: random(100vh);
-        left: random(100vw);
-      }
+    p {
+      line-height: 1.5;
+      color: #666;
     }
   </style>
 </head>
 
 <body>
-  <img src="zhangbing.jpg" style="position:absolute; top:0; left:0;">
-  <h1>那艺娜的大贝塔</h1>
-  <div class="scary-face">张兵我入</div>
-  <p>爱如火 恨如冰</p>
-  <button onclick="closeWindow()">关闭</button>
-  <script>
-    function closeWindow() {
-      window.close();
-    }
-  </script>
+  <h1>Page</h1>
+  <p>我不到做什么网页好</p>
+  <p>气死我了</p>
 </body>
 
 </html>
